@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wild Dog Studio</title>
+
+    <!-- GOOGLE ANALYTICS -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QMP8KG7PY5"></script> <!-- ADD NUMBER -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-QMP8KG7PY5'); <!-- ADD NUMBER -->
+    </script>
+
+    <!-- FONTAWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap" rel="stylesheet">
+
+    <style>
+        /* FONTS SETTINGS */
+        /* .font-title, .font-body, .font-mono */
+        :root {
+            /* COLORS */
+            --bg-color: #151515;
+            --text-color: #eee5d3;
+            --accent-dim: rgba(238, 229, 211, 0.6);
+            --border-color: rgba(238, 229, 211, 0.12);
+            --card-bg: rgba(238, 229, 211, 0.03);
+            --card-hover: rgba(238, 229, 211, 0.06);
+
+            /* FONTS */
+            --font-title: "DynaPuff", system-ui;
+            --font-body: "Encode Sans Semi Expanded", sans-serif;
+            --font-mono: "Electrolize", sans-serif;
+        }
+
+        /* FONTS CLASSES */
+        .font-title { font-family: var(--font-title); }
+        .font-body  { font-family: var(--font-body); }
+        .font-mono  { font-family: var(--font-mono); }
+
+        /* BASIC STYLES */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* NAVIGATION */
+        .side-nav {
+            position: fixed;
+            right: 28px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            text-decoration: none;
+            color: var(--accent-dim);
+            gap: 10px;
+            transition: all 0.25s ease;
+        }
+
+        .nav-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0;
+            transform: translateX(8px);
+            transition: all 0.25s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .nav-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: var(--accent-dim);
+            transition: all 0.25s ease;
+        }
+
+        .nav-item:hover .nav-label {
+            opacity: 1;
+            transform: translateX(0);
+            color: var(--text-color);
+        }
+
+        .nav-item:hover .nav-dot {
+            background-color: var(--text-color);
+            transform: scale(1.4);
+        }
+
+        /* SECTION CONTAINER */
+        main {
+            flex: 1;
+            width: 100%;
+            max-width: min(85vw, 1400px);
+            margin: 0 auto;
+            padding-left: 32px;
+            padding-right: 64px;
+        }
+
+        /* SECTIONS STRUCTURE */
+        section {
+            display: flex;
+            flex-direction: column;
+            padding: 24px 0 48px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-header {
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        /* ABOUT SECTION */
+        #about {
+            padding-top: 70px;
+            padding-bottom: 50px;
+        }
+
+        .logo-wrapper {
+            margin-bottom: 30px;
+            max-width: 160px;
+            max-height: 160px;
+        }
+
+        .logo-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 4px 16px rgba(0,0,0,0.5));
+        }
+
+        .studio-title {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+        }
+
+        .studio-desc {
+            font-size: 1.15rem;
+            color: var(--accent-dim);
+            max-width: 580px;
+        }
+
+        /* LINK TILE */
+        .tiles-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 28px;
+        }
+
+        .link-tile {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 20px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            text-decoration: none;
+            width: 280px;
+            max-width: 100%;
+            flex: 0 0 auto;
+            transition: all 0.2s ease;
+        }
+
+        a.link-tile:hover {
+            background-color: var(--card-hover);
+            border-color: rgba(238, 229, 211, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .link-tile.disabled {
+            cursor: default;
+            opacity: 0.6;
+            user-select: none;
+        }
+
+        .link-tile-icon {
+            font-size: 1.6rem;
+            color: var(--accent-dim);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+            transition: color 0.2s ease;
+        }
+
+        a.link-tile:hover .link-tile-icon {
+            color: var(--text-color);
+        }
+
+        .link-tile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .link-tile-icon img {
+            width: 48px;
+            height: 48px;
+            display: block;
+            object-fit: cover;
+            border-radius: 40%;
+        }
+
+        .link-tile-title {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .link-tile-desc {
+            font-size: 0.85rem;
+            color: var(--accent-dim);
+            line-height: 1.4;
+        }
+
+        /* DOCUMENTS SECTION */
+        .documents-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .doc-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: border-color 0.2s ease;
+        }
+
+        .doc-item:hover {
+            border-color: rgba(238, 229, 211, 0.25);
+        }
+
+        .doc-header {
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .doc-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .doc-icon {
+            font-size: 0.9rem;
+            transition: transform 0.3s ease;
+        }
+
+        .doc-item.active .doc-icon {
+            transform: rotate(180deg);
+        }
+
+        .doc-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0, 1, 0, 1);
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .doc-item.active .doc-content {
+            max-height: 65vh;
+            transition: max-height 0.4s ease-in-out;
+        }
+
+        .doc-inner-scroll {
+            padding: 24px;
+            max-height: 60vh;
+            overflow-y: auto;
+            color: var(--accent-dim);
+            font-size: 0.95rem;
+            white-space: pre-line;
+        }
+
+        .doc-inner-scroll strong,
+        .doc-inner-scroll b {
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .doc-inner-scroll a {
+            color: var(--text-color);
+            text-decoration: underline;
+            text-decoration-color: var(--accent-dim);
+            text-underline-offset: 3px;
+            transition: all 0.2s ease;
+        }
+
+        .doc-inner-scroll a:hover {
+            color: #ffffff;
+            text-decoration-color: #ffffff;
+        }
+
+        /* CUSTOM SCROLLBAR */
+        .doc-inner-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .doc-inner-scroll::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .doc-inner-scroll::-webkit-scrollbar-thumb {
+            background: rgba(238, 229, 211, 0.2);
+            border-radius: 3px;
+        }
+        .doc-inner-scroll::-webkit-scrollbar-thumb:hover {
+            background: rgba(238, 229, 211, 0.4);
+        }
+
+        /* CONTACTS SECTION */
+        .contacts-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 24px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-color);
+            text-decoration: none;
+            width: fit-content;
+            transition: all 0.2s ease;
+        }
+
+        .contact-card:hover {
+            background-color: var(--card-hover);
+            border-color: rgba(238, 229, 211, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .contact-card i {
+            font-size: 1.2rem;
+            color: var(--accent-dim);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: rgba(238, 229, 211, 0.04);
+            border-top: 1px solid var(--border-color);
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--accent-dim);
+        }
+
+        /* ADAPTABILITY */
+        @media (max-width: 768px) {
+            main {
+                padding: 0 20px;
+            }
+            .side-nav {
+                right: 12px;
+                gap: 12px;
+            }
+            .nav-label {
+                display: none;
+            }
+            .nav-dot {
+                width: 6px;
+                height: 6px;
+            }
+            section {
+                padding: 36px 0;
+            }
+            .link-tile {
+                max-width: 100%;
+            }
+            footer {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="side-nav" aria-label="Quick navigation">
+        <a href="#about" class="nav-item">
+            <span class="nav-label font-mono">About</span>
+            <div class="nav-dot"></div>
+        </a>
+        <a href="#documents" class="nav-item">
+            <span class="nav-label font-mono">Documents</span>
+            <div class="nav-dot"></div>
+        </a>
+        <a href="#contacts" class="nav-item">
+            <span class="nav-label font-mono">Contacts</span>
+            <div class="nav-dot"></div>
+        </a>
+    </nav>
+
+    <main>
+        <!-- ABOUT SECTION -->
+        <section id="about">
+
+            <!-- STUDIO LOGO -->
+            <div class="logo-wrapper">
+                <img src="images/wds_logo.webp" alt="Wild Dog Studio Logo" class="logo-img" loading="lazy" width="160" height="160">
+            </div>
+
+            <!-- STUDIO TITLE -->
+            <h1 class="studio-title font-title">Wild Dog Studio</h1>
+
+            <!-- STUDIO SUBTITLE -->
+            <p class="studio-desc font-body">
+                A small, independent developer of such hits as...
+            </p>
+
+            <!-- LINKS -->
+        <div class="tiles-wrapper">
+
+            <!-- 1st ITEM -->
+            <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="link-tile">
+                <!-- ICON -->
+                <div class="link-tile-icon">
+                    <img src="images/parking_game_icon.webp" alt="Parking Game Icon" class="tile-custom-icon" loading="lazy" width="48" height="48">
+                </div>
+                <div class="link-tile-info">
+                    <!-- TITLE -->
+                    <span class="link-tile-title font-title">Parking Game</span>
+                    <!-- SUBTITILE -->
+                    <span class="link-tile-desc font-body">Incredible simulator!</span>
+                </div>
+            </a>
+
+            <!-- 2nd ITEM -->
+            <div class="link-tile disabled">
+                <!-- ICON -->
+                <div class="link-tile-icon">
+                    <i class="fa-regular fa-clock"></i>
+                </div>
+                <div class="link-tile-info">
+                    <!-- TITLE -->
+                    <span class="link-tile-title font-title">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- DOCUMENTS SECTION -->
+        <section id="documents">
+            <div class="section-header">
+                <h2 class="section-title font-title">Documents</h2>
+            </div>
+
+            <div class="documents-list">
+                <!-- PRIVACY POLICY DOC -->
+                <div class="doc-item">
+                    <div class="doc-header" onclick="toggleDoc(this)">
+                        <span class="doc-title font-mono">
+                            <i class="fa-regular fa-file-lines"></i>
+                            
+                            <!-- PRIVACY POLICY DOC TITLE -->
+                            Privacy Policy
+                        </span>
+                        <span class="doc-icon font-mono">▼</span>
+                    </div>
+                    
+                    <!-- PRIVACY POLICY DOC CONTENT -->
+                    <div class="doc-content">
+                        <div class="doc-inner-scroll font-body">
+<strong>Privacy Policy</strong>
+This Privacy Policy applies to the )))Parking Game((( mobile application and related services operated under the Wild Dog Studio name (collectively, the "Application"). In this Privacy Policy, "Wild Dog Studio", "we", "us", and "our" refer to the operator of the Application.
+
+
+<strong>Information We Collect</strong>
+The Application and certain third-party services used by the Application may automatically collect technical and usage information when you download and use the Application.
+
+Depending on the services and features you use, this information may include:
+◆ Device information, such as device type and operating system
+◆ IP address
+◆ Advertising identifiers and other device identifiers
+◆ Information about your interactions with the Application
+◆ Application usage and diagnostic information
+◆ Information about the time and duration of your use of the Application
+
+We do not require you to provide your name, postal address, or other directly identifying information to use the Application unless specifically stated otherwise.
+
+
+<strong>How We Use Information</strong>
+Information collected through the Application may be used to:
+◆ Provide, maintain, and improve the Application
+◆ Analyze how the Application is used and identify technical issues
+◆ Provide and measure advertising
+◆ Prevent fraud, abuse, and other unauthorized activity
+◆ Comply with applicable legal obligations
+◆ Respond to user requests and provide support
+
+Where processing requires your consent under applicable law, the relevant third-party service or the Application will request consent where appropriate.
+
+
+<strong>Advertising and Analytics</strong>
+The Application uses third-party advertising and analytics services. These services may collect and process information such as device information, IP address, advertising identifiers, usage information, diagnostic data, and information about interactions with the Application.
+
+The third-party services currently used by the Application may include:
+◆ Devtodev
+◆ Google AdMob
+◆ LevelPlay / ironSource
+◆ Unity Ads
+◆ Unity services
+
+These third-party providers may use collected information to provide advertising, measure advertising performance, provide analytics, prevent fraud, and improve their services.
+
+Third-party providers may process information in accordance with their own privacy policies. Their privacy policies are available below:
+◆ <a href="https://www.devtodev.com/policy" target="_blank" rel="noopener noreferrer">Devtodev</a>
+◆ <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">Google</a>
+◆ <a href="https://unity.com/legal" target="_blank" rel="noopener noreferrer">LevelPlay / ironSource</a>
+◆ <a href="https://unity.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Unity</a>
+
+
+<strong>Third-Party Service Providers</strong>
+We may use third-party service providers to operate, maintain, analyze, and improve the Application.
+These providers may process information on our behalf and may have access to information necessary to perform their services. They are expected to process such information in accordance with applicable law and their applicable privacy policies.
+
+We may also disclose information:
+◆ When required by applicable law or legal process
+◆ When reasonably necessary to protect our rights, users, or the security of the Application
+◆ To detect or investigate fraud, abuse, or security issues
+◆ To service providers that assist us in operating the Application
+
+
+<strong>Data Retention and Deletion</strong>
+We retain information only for as long as reasonably necessary for the purposes described in this Privacy Policy, to provide and improve the Application, maintain security, resolve disputes, comply with legal obligations, or for other legitimate purposes permitted by applicable law.
+Third-party service providers may retain information they collect in accordance with their own privacy policies and applicable legal requirements.
+You may request deletion of personal information held by us by contacting us using the contact details provided in the "Contact Us" section below.
+Some information may need to be retained where required by law or where necessary for legitimate business or security purposes.
+
+
+<strong>Your Privacy Rights</strong>
+Depending on your location and applicable law, you may have rights regarding your personal information, including the right to:
+◆ Request access to personal information we hold about you
+◆ Request correction of inaccurate personal information
+◆ Request deletion of personal information
+◆ Withdraw consent where processing is based on consent
+◆ Exercise other rights provided by applicable law
+
+To exercise your rights, please contact us using the contact details provided in the "Contact Us" section below.
+We may need to verify your request before processing it. Your rights may be subject to applicable legal limitations and exceptions.
+
+
+<strong>Your California Privacy Rights</strong>
+If you are a California resident, you may have additional rights under applicable California privacy laws, including the California Consumer Privacy Act (CCPA), as amended by the California Privacy Rights Act (CPRA).
+Depending on the circumstances, these rights may include the right to know about personal information collected about you, request deletion, correct certain information, and opt out of the sale or sharing of personal information where applicable.
+To exercise applicable California privacy rights, please contact us using the contact details provided in the "Contact Us" section below.
+We will process such requests in accordance with applicable California law.
+
+
+<strong>International Data Transfers</strong>
+Information may be processed by us and our third-party service providers in countries other than your country of residence.
+Where applicable law requires safeguards for international transfers of personal information, appropriate safeguards will be used.
+
+
+<strong>Children's Privacy</strong>
+The Application is not directed to children, and we do not knowingly collect personal information from children in violation of applicable law.
+If we become aware that we have collected personal information from a child in circumstances where such collection is not permitted, we will take reasonable steps to delete the information.
+If you believe that a child has provided personal information through the Application, please contact us using the contact details provided in the "Contact Us" section below.
+
+
+<strong>Security</strong>
+We take reasonable technical and organizational measures designed to protect personal information against unauthorized access, loss, misuse, or disclosure.
+However, no method of transmission or electronic storage can be guaranteed to be completely secure.
+
+
+<strong>Data Breach Notification</strong>
+If a security breach affects personal information and applicable law requires notification, we will provide notification in accordance with the applicable legal requirements.
+
+
+<strong>Changes to This Privacy Policy</strong>
+We may update this Privacy Policy from time to time to reflect changes to the Application, our services, or applicable legal requirements.
+When we make changes, we will publish the updated Privacy Policy with a new effective date. Where required by applicable law, we will provide additional notice or obtain consent before material changes take effect.
+This Privacy Policy is effective as of 2026-09-19.
+
+
+<strong>Contact Us</strong>
+If you have any questions about this Privacy Policy or our privacy practices, please contact us at: support@wilddogstudio.aleeas.com.
+                       </div>
+                    </div>
+                </div>
+                <!-- END OF PRIVACY POLICY DOC -->
+            </div>
+        </section>
+
+        <!-- CONTACTS SECTION -->
+        <section id="contacts">
+            <div class="section-header">
+                <h2 class="section-title font-title">Contacts</h2>
+            </div>
+
+            <div class="contacts-wrapper">
+                <!-- EMAIL -->
+                <a href="mailto:support@wilddogstudio.aleeas.com" class="contact-card font-mono">
+                    <i class="fa-regular fa-envelope"></i>
+                    <span>support@wilddogstudio.aleeas.com</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <!-- FOOTER TEXT -->
+        <span class="font-body">© 2026 Wild Dog Studio. All rights reserved.</span>
+        <span class="font-mono" style="opacity: 0.7;">From us with ❤️</span>
+    </footer>
+
+    <!-- DOCS SCRIPT -->
+    <script>
+        function toggleDoc(headerElement) {
+            const item = headerElement.parentElement;
+            item.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
