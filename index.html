@@ -377,6 +377,8 @@
             color: var(--text-color);
             text-decoration: none;
             width: fit-content;
+            max-width: 100%;
+            word-break: break-all;
             transition: all 0.2s ease;
         }
 
@@ -405,30 +407,41 @@
 
         /* ADAPTABILITY */
         @media (max-width: 768px) {
+            html, body {
+                overflow-x: hidden;
+            }
             main {
-                padding: 0 20px;
+                padding-left: 16px;
+                padding-right: 36px; 
             }
             .side-nav {
-                right: 12px;
+                right: 10px;
                 gap: 12px;
             }
             .nav-label {
-                display: none;
+                display: none !important;
             }
             .nav-dot {
                 width: 6px;
                 height: 6px;
+            }
+            .contact-card {
+                padding: 12px 16px;
+                font-size: 0.85rem;
+                gap: 10px;
             }
             section {
                 padding: 36px 0;
             }
             .link-tile {
                 max-width: 100%;
+                width: 100%;
             }
             footer {
                 flex-direction: column;
                 gap: 10px;
                 text-align: center;
+                padding-right: 36px;
             }
         }
     </style>
@@ -481,7 +494,7 @@
                     <!-- TITLE -->
                     <span class="link-tile-title font-title">Park Master: GO!</span>
                     <!-- SUBTITILE -->
-                    <span class="link-tile-desc font-body">Park & grow. Be the master!</span>
+                    <span class="link-tile-desc font-body">Park & grow.<br>Be the master!</span>
                 </div>
             </a>
 
