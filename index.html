@@ -362,18 +362,19 @@
         /* CONTACTS SECTION */
         .contacts-wrapper {
             display: flex;
-            flex-direction: column;
-            gap: 16px;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
         }
 
         .contact-card {
             display: inline-flex;
             align-items: center;
-            gap: 16px;
-            padding: 18px 24px;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
+            gap: 12px;
+            padding: 4px 0px;
+            background-color: transparent;
+            border: none;
             color: var(--text-color);
             text-decoration: none;
             width: fit-content;
@@ -383,14 +384,18 @@
         }
 
         .contact-card:hover {
-            background-color: var(--card-hover);
-            border-color: rgba(238, 229, 211, 0.3);
+            color: #ffffff;
             transform: translateY(-2px);
         }
 
         .contact-card i {
             font-size: 1.2rem;
             color: var(--accent-dim);
+            transition: color 0.2s ease;
+        }
+
+        .contact-card:hover i {
+            color: var(--text-color);
         }
 
         /* FOOTER */
@@ -666,6 +671,16 @@ If you have any questions about this Privacy Policy or our privacy practices, pl
                 <a href="mailto:support@wilddogstudio.aleeas.com" class="contact-card font-mono">
                     <i class="fa-regular fa-envelope"></i>
                     <span>support@wilddogstudio.aleeas.com</span>
+                </a>
+                <!-- FACEBOOK -->
+                <a href="https://www.facebook.com/61594843427905" target="_blank" rel="noopener noreferrer" class="contact-card font-mono">
+                    <i class="fa-brands fa-square-facebook"></i>
+                    <span>Facebook</span>
+                </a>
+                <!-- PIXELPICKED -->
+                <a href="https://pixelpicked.com/game/2p6VFwSMGQt/park-master-go" target="_blank" rel="noopener noreferrer" class="contact-card font-mono">
+                    <img src="https://api.pixelpicked.com/api/badges/2p6VFwSMGQt/live.png?theme=dark"
+    width="250" height="54" alt="Approved on PixelPicked" />
                 </a>
             </div>
         </section>
