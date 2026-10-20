@@ -365,37 +365,72 @@
             flex-direction: row;
             flex-wrap: wrap;
             align-items: center;
-            gap: 40px;
+            gap: 16px;
         }
 
         .contact-card {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 4px 0px;
+            justify-content: center;
+            padding: 8px;
             background-color: transparent;
             border: none;
             color: var(--text-color);
             text-decoration: none;
-            width: fit-content;
-            max-width: 100%;
-            word-break: break-all;
+            cursor: pointer;
             transition: all 0.2s ease;
         }
 
         .contact-card:hover {
-            color: #ffffff;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
 
         .contact-card i {
-            font-size: 1.2rem;
+            font-size: 2.4rem;
             color: var(--accent-dim);
             transition: color 0.2s ease;
         }
 
         .contact-card:hover i {
             color: var(--text-color);
+        }
+
+        .email-card-wrapper {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            padding: 6px;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            transform: scale(1.1);
+            border-color: rgba(238, 229, 211, 0.4);
+        }
+
+        .copy-btn i {
+            font-size: 1rem !important;
+            color: var(--accent-dim);
+            display: block;
+        }
+
+       .copy-btn:hover i {
+            color: var(--text-color);
+        }
+
+       .contact-card.copied i {
+            color: #4caf50 !important;
         }
 
         /* FOOTER */
@@ -483,7 +518,7 @@
 
             <!-- STUDIO SUBTITLE -->
             <p class="studio-desc font-body">
-                A small, independent developer of such hits as...
+                A small, independent game developer.
             </p>
 
             <!-- LINKS -->
@@ -519,11 +554,8 @@
 
         <!-- DOCUMENTS SECTION -->
         <section id="documents">
-            <div class="section-header">
-                <h2 class="section-title font-title">Documents</h2>
-            </div>
-
             <div class="documents-list">
+
                 <!-- PRIVACY POLICY DOC -->
                 <div class="doc-item">
                     <div class="doc-header" onclick="toggleDoc(this)">
@@ -662,30 +694,31 @@ If you have any questions about this Privacy Policy or our privacy practices, pl
 
         <!-- CONTACTS SECTION -->
         <section id="contacts">
-            <div class="section-header">
-                <h2 class="section-title font-title">Contacts</h2>
-            </div>
-
             <div class="contacts-wrapper">
-                <!-- EMAIL -->
-                <a href="mailto:support@wilddogstudio.aleeas.com" class="contact-card font-mono">
-                    <i class="fa-regular fa-envelope"></i>
-                    <span>support@wilddogstudio.aleeas.com</span>
-                </a>
+
+                <!-- EMAIL & COPY BUTTON -->
+                <div class="email-card-wrapper">
+                    <a href="mailto:support@wilddogstudio.aleeas.com" class="contact-card" title="Send Email" aria-label="Send Email">
+                        <i class="fa-regular fa-envelope"></i>
+                    </a>
+                    <button type="button" class="contact-card copy-btn" onclick="copyEmail(this)" title="Copy Email Address" aria-label="Copy Email Address">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+
                 <!-- FACEBOOK -->
-                <a href="https://www.facebook.com/61594843427905" target="_blank" rel="noopener noreferrer" class="contact-card font-mono">
+                <a href="https://www.facebook.com/61594843427905" target="_blank" rel="noopener noreferrer" class="contact-card" title="Facebook" aria-label="Facebook">
                     <i class="fa-brands fa-square-facebook"></i>
-                    <span>Facebook</span>
                 </a>
+
                 <!-- PIXELPICKED -->
-                <a href="https://pixelpicked.com/game/2p6VFwSMGQt/park-master-go" target="_blank" rel="noopener noreferrer" class="contact-card font-mono">
-                    <img src="https://api.pixelpicked.com/api/badges/2p6VFwSMGQt/live.png?theme=dark"
-    width="250" height="54" alt="Approved on PixelPicked" />
+                <a href="https://pixelpicked.com/game/2p6VFwSMGQt/park-master-go" target="_blank" rel="noopener noreferrer" class="contact-card" aria-label="PixelPicked">
+                    <img src="https://api.pixelpicked.com/api/badges/2p6VFwSMGQt/live.png?theme=dark "width="250" height="54" alt="Approved on PixelPicked"/>
                 </a>
+
                 <!-- YOUTUBE -->
-                <a href="https://www.youtube.com/@WildDogWDS" target="_blank" rel="noopener noreferrer" class="contact-card font-mono">
+                <a href="https://www.youtube.com/@WildDogWDS" target="_blank" rel="noopener noreferrer" class="contact-card" title="YouTube" aria-label="YouTube">
                     <i class="fa-brands fa-youtube"></i>
-                    <span>YouTube</span>
                 </a>
             </div>
         </section>
@@ -695,7 +728,7 @@ If you have any questions about this Privacy Policy or our privacy practices, pl
     <footer>
         <!-- FOOTER TEXT -->
         <span class="font-body">© 2026 Wild Dog Studio. All rights reserved.</span>
-        <span class="font-mono" style="opacity: 0.7;">From us with ❤️</span>
+        <span class="font-mono" style="opacity: 0.7;">From Wild Dog with ❤️</span>
     </footer>
 
     <!-- DOCS SCRIPT -->
@@ -703,6 +736,21 @@ If you have any questions about this Privacy Policy or our privacy practices, pl
         function toggleDoc(headerElement) {
             const item = headerElement.parentElement;
             item.classList.toggle('active');
+        }
+
+        function copyEmail(button) {
+            const email = "support@wilddogstudio.aleeas.com";
+            navigator.clipboard.writeText(email).then(() => {
+                const icon = button.querySelector('i');
+                icon.className = 'fa-solid fa-check';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    icon.className = 'fa-regular fa-copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Error: ', err);
+            });
         }
     </script>
 </body>
