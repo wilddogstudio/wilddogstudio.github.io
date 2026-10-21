@@ -132,7 +132,7 @@
         section {
             display: flex;
             flex-direction: column;
-            padding: 24px 0 48px 0;
+            padding: 24px 0 24px 0;
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -153,8 +153,8 @@
 
         /* ABOUT SECTION */
         #about {
-            padding-top: 70px;
-            padding-bottom: 50px;
+            padding-top: 50px;
+            /* padding-bottom: 50px; */
         }
 
         .logo-wrapper {
@@ -465,17 +465,25 @@
                 width: 6px;
                 height: 6px;
             }
+            section {
+                padding: 20px 0;
+            }
+            .link-tile {
+                max-width: 100%;
+                width: 100%;
+            }
             .contact-card {
                 padding: 12px 16px;
                 font-size: 0.85rem;
                 gap: 10px;
             }
-            section {
-                padding: 36px 0;
+            .copy-btn {
+                padding: 4px;
+                top: 2px;
+                right: 2px;
             }
-            .link-tile {
-                max-width: 100%;
-                width: 100%;
+            .copy-btn i {
+                font-size: 0.7rem !important;
             }
             footer {
                 flex-direction: column;
@@ -711,14 +719,14 @@ If you have any questions about this Privacy Policy or our privacy practices, pl
                     <i class="fa-brands fa-square-facebook"></i>
                 </a>
 
-                <!-- PIXELPICKED -->
-                <a href="https://pixelpicked.com/game/2p6VFwSMGQt/park-master-go" target="_blank" rel="noopener noreferrer" class="contact-card" aria-label="PixelPicked">
-                    <img src="https://api.pixelpicked.com/api/badges/2p6VFwSMGQt/live.png?theme=dark "width="250" height="54" alt="Approved on PixelPicked"/>
-                </a>
-
                 <!-- YOUTUBE -->
                 <a href="https://www.youtube.com/@WildDogWDS" target="_blank" rel="noopener noreferrer" class="contact-card" title="YouTube" aria-label="YouTube">
                     <i class="fa-brands fa-youtube"></i>
+                </a>
+
+                <!-- PIXELPICKED -->
+                <a href="https://pixelpicked.com/game/2p6VFwSMGQt/park-master-go" target="_blank" rel="noopener noreferrer" class="contact-card" aria-label="PixelPicked">
+                    <img src="https://api.pixelpicked.com/api/badges/2p6VFwSMGQt/live.png?theme=dark "width="250" height="54" alt="Approved on PixelPicked"/>
                 </a>
             </div>
         </section>
@@ -727,8 +735,7 @@ If you have any questions about this Privacy Policy or our privacy practices, pl
     <!-- FOOTER -->
     <footer>
         <!-- FOOTER TEXT -->
-        <span class="font-body">© 2026 Wild Dog Studio</span>
-        <span class="font-mono" style="opacity: 0.7;">From Wild Dog with ❤️</span>
+        <span class="font-body">© 2026 From Wild Dog Studio with ❤️</span>
     </footer>
 
     <!-- DOCS SCRIPT -->
